@@ -28,7 +28,7 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, node, name=''):
+    def __init__(self, node=None, name=''):
         self.head = node
         self.name = name
 
@@ -47,7 +47,10 @@ class LinkedList:
     def traverse(self):
         return self.head.traverse()
 
-
+    def isEmpty(self):
+        if self.head is None:
+            return True
+        return False
 
 
 head = Node(10)
@@ -55,5 +58,9 @@ head.setNextNode(Node(20))
 head.getNextNode().setNextNode(Node(30))
 head.getNextNode().getNextNode().setNextNode(Node(40))
 
+list = LinkedList()
+print(list.isEmpty())
+
 list = LinkedList(head)
 list.traverse()
+print(list.isEmpty())
