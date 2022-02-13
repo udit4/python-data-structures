@@ -26,6 +26,14 @@ class Node:
             tempNode = tempNode.next
         return
 
+    def size(self):
+        size, tempNode = 0, self
+        while tempNode is not None:
+            size+=1
+            tempNode = tempNode.next
+        return size
+
+
 
 class LinkedList:
     def __init__(self, node=None, name=''):
@@ -52,15 +60,28 @@ class LinkedList:
             return True
         return False
 
+    def addFront(self, node):
+        newHeadNode = node
+        newHeadNode.next = self.head
+        self.head = newHeadNode
+        return
+
+    def size(self):
+        return self.head.size()
+
 
 head = Node(10)
 head.setNextNode(Node(20))
 head.getNextNode().setNextNode(Node(30))
 head.getNextNode().getNextNode().setNextNode(Node(40))
 
-list = LinkedList()
-print(list.isEmpty())
 
 list = LinkedList(head)
 list.traverse()
-print(list.isEmpty())
+print(list.size())
+
+list.addFront(Node(0))
+list.traverse()
+
+
+print(list.size())
