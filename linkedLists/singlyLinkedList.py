@@ -40,6 +40,40 @@ class Node:
         tempNode.setNextNode(node)
         return
 
+    def search(self, value):
+        tempNode = self
+        while tempNode is not None:
+            if tempNode.data == value:
+                return True
+            else:
+                tempNode = tempNode.next
+        return False
+
+    def removeNode(self, value):
+        tempNode = self
+        # case 1 :: when the node does not exist in the list or list is empty
+        exists = self.search(value)
+        if not exists:
+            print("node with value does not exist in the list")
+            return
+        else:
+            tempNode = self
+            # case 2 :: when the node is the head node
+            if tempNode.data == value:
+                nextNode = self.getNextNode()
+                self.data, self.next = nextNode.data, nextNode.next
+                return
+            # case 3 :: when the node is somwhere else in the list
+            prevNode = None
+            while tempNode.data != value:
+                prevNode = tempNode
+                tempNode = tempNode.next
+            prevNode.next = tempNode.next
+            return
+        return
+
+
+
 
 
 class LinkedList:
@@ -79,6 +113,9 @@ class LinkedList:
     def addNode(self):
         return self.head.addNode()
 
+    def removeNode(self, value):
+        return self.head.removeNode(value)
+
 
 head = Node(10)
 head.addNode(Node(20))
@@ -89,4 +126,11 @@ head.addNode(Node(40))
 list = LinkedList(head)
 
 list.addFront(Node(0))
+list.traverse()
+
+list.removeNode(0)
+list.traverse()
+
+list.removeNode(40)
+list.removeNode(100)
 list.traverse()
